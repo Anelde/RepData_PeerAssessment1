@@ -51,12 +51,13 @@ data_no_NA <- data[complete.cases(data),]
 # 1. calculate total number of steps per day
 total_steps <- aggregate(steps ~ date, data_no_NA, sum)
 # 2. Make a histogram of the total number of steps taken each day
-png('figure/hist_total_steps_per_day.png')
 ggplot(total_steps, aes(x = steps)) + 
        geom_histogram(fill = "blue", binwidth = 1000) + 
         labs(title="Histogram of Steps Taken per Day", 
              x = "Number of Steps per Day", y = "Number of times in a day(Count)")
 ```
+
+![](PA1_template_files/figure-html/Total steps per day-1.png)
      
 The mean of the total number of steps per day is:
 
@@ -85,9 +86,10 @@ median(total_steps$steps)
 ```r
 # 1. Make a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all days (y-axis)
 average_steps <- aggregate(steps ~ interval, data_no_NA, mean)
-png('figure/plot_average_steps.png')
 plot(average_steps, type = "l", xlab = "Interval", ylab = "Average steps")
 ```
+
+![](PA1_template_files/figure-html/Daily activity-1.png)
 
 The interval with the maximum average steps across all days is: 
 
@@ -129,12 +131,13 @@ Calculate again the mean and median of the total steps taken per day.
 ```r
 total_steps_new <- aggregate(steps ~ date, data_replaced_NA, sum)
 # 2. Make a histogram of the total number of steps taken each day
-png('figure/hist_total_steps_per_day_new.png')
 ggplot(total_steps_new, aes(x = steps)) + 
        geom_histogram(fill = "blue", binwidth = 1000) + 
         labs(title="Histogram of Steps Taken per Day", 
              x = "Number of Steps per Day", y = "Number of times in a day(Count)")
 ```
+
+![](PA1_template_files/figure-html/total steps per day new-1.png)
      
 The mean of the total number of steps per day is:
 
@@ -177,13 +180,9 @@ Make a panel plot containing a time series plot (i.e. type = "l") of the 5-minut
 ```r
 #2. Make a panel plot containing a time series plot
 average_steps_day <- aggregate(steps ~ interval + day, data_replaced_NA, mean)
-png('figure/plot_average_steps_day.png')
 xyplot(steps ~ interval | day, average_steps_day, type="l", grid=T, layout=c(1,2), ylab="Number of steps", xlab="interval")
 ```
 
-
-```r
-dev.off()
-```
+![](PA1_template_files/figure-html/Make a panel plot containing a time series plot-1.png)
 
 From the plot made in de code chunk here above it can be seen that there are differences between weekdays and weekends. During the weekend there are more steps taken during the day while on weekdays the most steps are taking in the beginning of the day.
